@@ -1,0 +1,141 @@
+# Project-wide for the project and applciations
+# Teemu Viikeri (C) 2025
+# This file is distributed under the same license as the project.
+# Teemu Viikeri tepavi@gmail.com, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-06 15:43+0000\n"
+"PO-Revision-Date: 2025-08-03 18:18+0300\n"
+"Last-Translator: Teemu Viikeri tepavi@gmail.com\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Activity date"
+msgstr "Päivämäärä"
+
+msgid "User"
+msgstr "Käyttäjä"
+
+msgid "Distance"
+msgstr "Etäisyys"
+
+msgid "Duration"
+msgstr "Kesto"
+
+msgid "Pace"
+msgstr "Vauhti"
+
+msgid "Average heart rate"
+msgstr "Keskimääräinen syke"
+
+msgid "Maximum heart rate"
+msgstr "Maksimisyke"
+
+msgid "Ascent"
+msgstr "Nousuja"
+
+msgid "Descent"
+msgstr "Laskuja"
+
+msgid "Running activity"
+msgstr "Juoksuaktiviteetti"
+
+msgid "Running activities"
+msgstr "Juoksuaktiviteetit"
+
+msgid "Confirm deletion"
+msgstr "Vahvista poisto"
+
+#, python-format
+msgid "Are you sure you want to delete the run from %(date)s?"
+msgstr "Oletko varma, että haluat poistaa juoksun päivältä %(date)s?"
+
+msgid "Yes, delete"
+msgstr "Kyllä, poista"
+
+msgid "No, cancel"
+msgstr "Ei, peruuta"
+
+#, python-format
+msgid "Edit run from %(date)s"
+msgstr "Muokkaa juoksua päivältä %(date)s"
+
+msgid "Submit a new run"
+msgstr "Tallenna uusi juoksu"
+
+msgid "Back to list"
+msgstr "Takaisin listaan"
+
+msgid "Add an additional metric"
+msgstr "Lisää lisätietoja"
+
+msgid "Select a metric"
+msgstr "Valitse lisätieto"
+
+msgid "Save activity"
+msgstr "Tallenna aktiviteetti"
+
+msgid "Delete"
+msgstr "Poista"
+
+msgid "My runs"
+msgstr "Omat juoksuni"
+
+msgid "Edit"
+msgstr "Muokkaa"
+
+msgid "You have not logged any runs yet."
+msgstr "Et ole vielä kirjannut yhtään juoksua."
+
+msgid "Log a new run"
+msgstr "Kirjaa uusi juoksu"
+
+msgid "English"
+msgstr "Englanti"
+
+msgid "Finnish"
+msgstr "Suomi"
+
+msgid "Log out"
+msgstr "Kirjaudu ulos"
+
+msgid "Log in"
+msgstr "Kirjaudu sisään"
+
+msgid "Register"
+msgstr "Rekisteröi tili"
+
+msgid "Logged out"
+msgstr "Uloskirjautunut"
+
+msgid "You have been logged out"
+msgstr "Olet kirjautunut ulos"
+
+msgid "Thank you for visiting."
+msgstr "Kiitos käynnistä."
+
+msgid "You can log in again using the link below."
+msgstr "Voit kirjautua sisään uudelleen alla olevan linkin avulla."
+
+msgid "Don't have an account?"
+msgstr "Ei ole tiliä?"
+
+msgid "Sign up here"
+msgstr "Rekisteröidy tästä"
+
+msgid "Sign up"
+msgstr "Rekisteröidy"
+
+msgid "Already have an account?"
+msgstr "Onko jo tili?"
+
+msgid "Log in here"
+msgstr "Kirjaudu sisään tästä"

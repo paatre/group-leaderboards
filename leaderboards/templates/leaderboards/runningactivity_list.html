@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "My runs" %}{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">{% translate "My runs" %}</h1>
+
+{% if activities %}
+    <div class="row row-cols-1 g-4">
+        {% for activity in activities %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">{{ activity.activity_date }}</h5>
+                            <a href="{% url 'edit-running-activity' pk=activity.pk %}" class="btn btn-sm btn-outline-secondary">{% translate "Edit" %}</a>
+                        </div>
+                        <hr>
+                        <p class="card-text">
+                            <strong class="text-muted">{% translate "Distance" %}:</strong> <span class="metric-value">{{ activity.distance|default:"0" }} km</span><br>
+                            <strong class="text-muted">{% translate "Duration" %}:</strong> <span class="metric-value">{{ activity.duration|default:"00:00:00" }}</span><br>
+                            <strong class="text-muted">{% translate "Pace" %}:</strong> <span class="metric-value">{{ activity.pace|default:"00:00" }} min/km</span><br>
+                            {% if activity.heart_rate_avg %}
+                                <strong class="text-muted">{% translate "Average heart rate" %}:</strong> <span class="metric-value">{{ activity.heart_rate_avg }} bpm</span><br>
+                            {% endif %}
+                            {% if activity.heart_rate_max %}
+                                <strong class="text-muted">{% translate "Maximum heart rate" %}:</strong> <span class="metric-value">{{ activity.heart_rate_max }} bpm</span><br>
+                            {% endif %}
+                            {% if activity.ascent %}
+                                <strong class="text-muted">{% translate "Ascent" %}:</strong> <span class="metric-value">{{ activity.ascent }} m</span><br>
+                            {% endif %}
+                            {% if activity.descent %}
+                                <strong class="text-muted">{% translate "Descent" %}:</strong> <span class="metric-value">{{ activity.descent }} m</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info" role="alert">
+        {% translate "You have not logged any runs yet." %}
+    </div>
+{% endif %}
+
+<a href="{% url 'create-running-activity' %}" class="btn btn-primary mt-4">{% translate "Log a new run" %}</a>
+{% endblock %}

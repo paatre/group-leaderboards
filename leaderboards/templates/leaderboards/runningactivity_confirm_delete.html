@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Confirm deletion" %}{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">{% translate "Confirm deletion" %}</h1>
+
+<div class="alert alert-warning" role="alert">
+    <p>{% blocktranslate with date=object.activity_date %}Are you sure you want to delete the run from {{ date }}?{% endblocktranslate %}</p>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">{% translate "Yes, delete" %}</button>
+    <a href="{% url 'edit-running-activity' pk=object.pk %}" class="btn btn-secondary">{% translate "No, cancel" %}</a>
+</form>
+{% endblock %}

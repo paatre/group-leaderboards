@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block title %}
+    {% if object %}
+        {% blocktranslate with date=object.activity_date %}Edit run from {{ date }}{% endblocktranslate %}
+    {% else %}
+        {% translate "Submit a new run" %}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'activity-list' %}" class="btn btn-secondary mb-4">{% translate "Back to list" %}</a>
+
+{% if object %}
+    <h1 class="mb-4">{% blocktranslate with date=object.activity_date %}Edit run from {{ date }}{% endblocktranslate %}</h1>
+{% else %}
+    <h1 class="mb-4">{% translate "Submit a new run" %}</h1>
+{% endif %}
+
+<div class="card p-4 shadow-sm">
+    <form method="post">
+        {% csrf_token %}
+
+        {% bootstrap_field form.activity_date %}
+        {% bootstrap_field form.distance %}
+        {% bootstrap_field form.duration %}
+        {% bootstrap_field form.pace %}
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="metric-selector" class="form-label">{% translate "Add an additional metric" %}</label>
+                <select id="metric-selector" class="form-select">
+                    <option value="">-- {% translate "Select a metric" %} --</option>
+                    <option value="heart_rate_avg">{% translate "Average heart rate" %}</option>
+                    <option value="heart_rate_max">{% translate "Maximum heart rate" %}</option>
+                    <option value="ascent">{% translate "Ascent" %}</option>
+                    <option value="descent">{% translate "Descent" %}</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="additional-metrics">
+            <div id="heart_rate_avg-container" style="display:none;">
+                {% bootstrap_field form.heart_rate_avg %}
+            </div>
+            <div id="heart_rate_max-container" style="display:none;">
+                {% bootstrap_field form.heart_rate_max %}
+            </div>
+            <div id="ascent-container" style="display:none;">
+                {% bootstrap_field form.ascent %}
+            </div>
+            <div id="descent-container" style="display:none;">
+                {% bootstrap_field form.descent %}
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            {% bootstrap_button button_type="submit" content=_("Save activity") %}
+            {% if object %}
+                <a href="{% url 'delete-running-activity' pk=object.pk %}" class="btn btn-danger">{% translate "Delete" %}</a>
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const selector = document.getElementById('metric-selector');
+        const additionalMetrics = ['heart_rate_avg', 'heart_rate_max', 'ascent', 'descent'];
+
+        additionalMetrics.forEach(field => {
+            const fieldInput = document.getElementById(`id_${field}`);
+            if (fieldInput && fieldInput.value) {
+                const container = document.getElementById(`${field}-container`);
+                if (container) {
+                    container.style.display = 'block';
+                }
+                const option = selector.querySelector(`option[value="${field}"]`);
+                if (option) {
+                    option.remove();
+                }
+            }
+        });
+
+        selector.addEventListener('change', (event) => {
+            const selectedValue = event.target.value;
+            if (selectedValue) {
+                const container = document.getElementById(`${selectedValue}-container`);
+                if (container) {
+                    container.style.display = 'block';
+
+                    const selectedOption = selector.querySelector(`option[value="${selectedValue}"]`);
+                    if (selectedOption) {
+                        selectedOption.remove();
+                    }
+                    selector.value = '';
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

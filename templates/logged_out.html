@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block title %}{% translate "Logged out" %}{% endblock %}
+
+{% block content %}
+<div class="text-center my-5">
+    <h1 class="display-4">{% translate "You have been logged out" %}</h1>
+    <p class="lead">{% translate "Thank you for visiting." %}</p>
+    <hr class="my-4">
+    <p>{% translate "You can log in again using the link below." %}</p>
+    <a href="{% url 'login' %}" class="btn btn-primary btn-lg">{% translate "Log in" %}</a>
+</div>
+{% endblock %}
