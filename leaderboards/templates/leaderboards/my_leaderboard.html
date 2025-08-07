@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Leaderboard" %}{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">{% translate "Leaderboard" %}</h1>
+
+<div class="mb-3">
+    <a href="{% url 'leaderboard' %}?sort_by=distance" class="btn {% if current_sort == 'distance' %}btn-primary{% else %}btn-secondary{% endif %}">{% translate "Distance" %}</a>
+    <a href="{% url 'leaderboard' %}?sort_by=duration" class="btn {% if current_sort == 'duration' %}btn-primary{% else %}btn-secondary{% endif %}">{% translate "Duration" %}</a>
+    <a href="{% url 'leaderboard' %}?sort_by=pace" class="btn {% if current_sort == 'pace' %}btn-primary{% else %}btn-secondary{% endif %}">{% translate "Pace" %}</a>
+</div>
+
+{% if activities %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">{% translate "User" %}</th>
+                    <th scope="col">{% translate "Date" %}</th>
+                    {# Conditionally show the header based on current_sort #}
+                    {% if current_sort == 'distance' %}
+                        <th scope="col">{% translate "Distance" %}</th>
+                    {% elif current_sort == 'duration' %}
+                        <th scope="col">{% translate "Duration" %}</th>
+                    {% elif current_sort == 'pace' %}
+                        <th scope="col">{% translate "Pace" %}</th>
+                    {% else %} {# Default header if no sort_by or invalid #}
+                        <th scope="col">{% translate "Pace" %}</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for activity in activities %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ activity.user.username }}</td>
+                    <td>{{ activity.activity_date }}</td>
+                    {# Conditionally show the data based on current_sort #}
+                    {% if current_sort == 'distance' %}
+                        <td>{{ activity.distance|default:"0" }} km</td>
+                    {% elif current_sort == 'duration' %}
+                        <td>{{ activity.duration|default:"00:00:00" }}</td>
+                    {% elif current_sort == 'pace' %}
+                        <td>{{ activity.pace|default:"00:00" }} min/km</td>
+                    {% else %} {# Default data if no sort_by or invalid #}
+                        <td>{{ activity.pace|default:"00:00" }} min/km</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="alert alert-info" role="alert">
+        {% translate "No runs have been logged yet." %}
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function showColumn(metric) {
+    document.querySelectorAll('.column-distance, .column-duration, .column-pace').forEach(function(el) {
+        el.classList.add('d-none');
+    });
+
+    document.querySelectorAll('.column-' + metric).forEach(function(el) {
+        el.classList.remove('d-none');
+    });
+
+    const buttonContainer = document.getElementById('metric-toggle-buttons');
+    if (buttonContainer) {
+        buttonContainer.querySelectorAll('.btn').forEach(function(el) {
+            el.classList.remove('btn-primary');
+            el.classList.add('btn-secondary');
+        });
+        buttonContainer.querySelector('.btn[onclick*="showColumn(\'' + metric + '\')"]').classList.remove('btn-secondary');
+        buttonContainer.querySelector('.btn[onclick*="showColumn(\'' + metric + '\')"]').classList.add('btn-primary');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    showColumn('pace');
+});
+</script>
+{% endblock %}

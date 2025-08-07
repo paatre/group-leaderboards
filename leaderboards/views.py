@@ -9,6 +9,26 @@ from .forms import RunningActivityForm
 from .models import RunningActivity
 
 
+class LeaderboardView(ListView):
+    model = RunningActivity
+    template_name = 'leaderboards/my_leaderboard.html'
+    context_object_name = 'activities'
+
+    def get_queryset(self):
+        sort_by = self.request.GET.get('sort_by', 'pace')
+        sort_options = {
+            'distance': '-distance',
+            'duration': 'duration',
+            'pace': 'pace',
+        }
+        order_field = sort_options.get(sort_by, 'pace')
+        return RunningActivity.objects.all().order_by(order_field)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['current_sort'] = self.request.GET.get('sort_by', 'pace')
+        return context
+
 class LogoutView(DjangoLogoutView):
     next_page = reverse_lazy('logged-out')
 

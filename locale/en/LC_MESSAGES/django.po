@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-06 15:43+0000\n"
+"POT-Creation-Date: 2025-08-06 16:11+0000\n"
 "PO-Revision-Date: 2025-08-03 21:08+0300\n"
 "Last-Translator: Teemu Viikeri tepavi@gmail.com\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,6 +50,15 @@ msgstr "Running activity"
 
 msgid "Running activities"
 msgstr "Running activities"
+
+msgid "Leaderboard"
+msgstr "Leaderboard"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "No runs have been logged yet."
+msgstr "No runs have been logged yet."
 
 msgid "Confirm deletion"
 msgstr "Confirm deletion"
