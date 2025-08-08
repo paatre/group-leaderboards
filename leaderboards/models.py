@@ -3,6 +3,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
+
 class BaseActivity(models.Model):
     """
     Represents an activity that can be performed by a user
@@ -10,18 +11,19 @@ class BaseActivity(models.Model):
     be inherited by other models that define specific activities
     for various sports and activities.
     """
+
     activity_date = models.DateField(verbose_name=_("Activity date"))
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name='activities',
+        related_name="activities",
         verbose_name=_("User"),
     )
 
     class Meta:
         abstract = True
-        ordering = ['-activity_date']
+        ordering = ["-activity_date"]
 
 
 class RunningActivity(BaseActivity):
@@ -29,6 +31,7 @@ class RunningActivity(BaseActivity):
     Represents a running activity performed by a user.
     Inherits from BaseActivity to include common fields.
     """
+
     distance = models.DecimalField(
         null=True,
         blank=True,
