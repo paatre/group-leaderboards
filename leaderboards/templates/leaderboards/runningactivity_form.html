@@ -72,6 +72,7 @@
         const selector = document.getElementById('metric-selector');
         const additionalMetrics = ['heart_rate_avg', 'heart_rate_max', 'ascent', 'descent'];
 
+        // Show already filled additional metrics and remove them from the selector
         additionalMetrics.forEach(field => {
             const fieldInput = document.getElementById(`id_${field}`);
             if (fieldInput && fieldInput.value) {
@@ -86,6 +87,8 @@
             }
         });
 
+        // Show the corresponding input field when a metric is selected and
+        // remove the option from the selector
         selector.addEventListener('change', (event) => {
             const selectedValue = event.target.value;
             if (selectedValue) {
