@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load field_formatters %}
 
 <tbody id="leaderboard-table-body">
     {% for activity in activities %}
@@ -9,7 +10,7 @@
         {% if current_sort == 'distance' %}
             <td>{{ activity.distance|default:"0" }} km</td>
         {% elif current_sort == 'duration' %}
-            <td>{{ activity.duration|default:"00:00:00" }}</td>
+            <td>{{ activity.duration|format_time|default:"00:00:00" }}</td>
         {% else %}
             <td>{{ activity.pace|default:"00:00" }} min/km</td>
         {% endif %}
