@@ -14,6 +14,12 @@ class LeaderboardView(ListView):
     template_name = "leaderboards/my_leaderboard.html"
     context_object_name = "activities"
 
+    def get_template_names(self):
+        if self.request.headers.get("HX-Request"):
+            return ["leaderboards/partials/_leaderboard_full_partial.html"]
+        else:
+            return [self.template_name]
+
     def get_queryset(self):
         sort_by = self.request.GET.get("sort_by", "pace")
         sort_options = {

@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<tbody id="leaderboard-table-body">
+    {% for activity in activities %}
+    <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ activity.user.username }}</td>
+        <td>{{ activity.activity_date }}</td>
+        {% if current_sort == 'distance' %}
+            <td>{{ activity.distance|default:"0" }} km</td>
+        {% elif current_sort == 'duration' %}
+            <td>{{ activity.duration|default:"00:00:00" }}</td>
+        {% else %}
+            <td>{{ activity.pace|default:"00:00" }} min/km</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</tbody>

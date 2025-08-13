@@ -1,0 +1,19 @@
+{% load i18n %}
+
+<thead id="leaderboard-table-head">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">{% translate "User" %}</th>
+        <th scope="col">{% translate "Date" %}</th>
+        <th scope="col">
+            {% if current_sort == 'distance' %}
+                {% translate "Distance" %}
+            {% elif current_sort == 'duration' %}
+                {% translate "Duration" %}
+            {% else %}
+                {% translate "Pace" %}
+            {% endif %}
+        </th>
+    </tr>
+</thead>
+
