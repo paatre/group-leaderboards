@@ -9,9 +9,12 @@
 
 ### TODO
 
-- Improve leaderboard sorting and filtering UX (current sorting does a re-render of the entire leaderboard)
+- Add filter to leaderboard which lets you see all metrics at once instead of single metric to get more context for activity performances
+- Add ascending and descending sorting options for the leaderboard metrics: sort toggle buttons to column headers?
+- Create an activity directly from the leaderboard
 - Add group management features
 - Add user profiles
 - Add more activity types (cycling, swimming, etc.)
 - Add tier lists
 - Add animations for leaderboard updates
+- Color themes to the user profiles
