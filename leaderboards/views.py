@@ -28,7 +28,7 @@ class LeaderboardView(ListView):
             "pace": "pace",
         }
         order_field = sort_options.get(sort_by, "pace")
-        return RunningActivity.objects.all().order_by(order_field)
+        return RunningActivity.objects.filter(user=self.request.user).order_by(order_field)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
