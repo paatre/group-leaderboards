@@ -2,43 +2,42 @@
 {% load field_formatters %}
 
 <template>
-    <div id="sort-buttons" hx-swap-oob="outerHTML">
-        {% include "leaderboards/partials/_leaderboard_sort_buttons.html" with current_sort=current_sort %}
-    </div>
+    {% include "leaderboards/partials/_leaderboard_sort_buttons.html" with current_sort=current_sort %}
 </template>
 
-<template>
-    <thead id="leaderboard-table-head" hx-swap-oob="outerHTML">
+<table id="leaderboard-table" class="table table-striped table-hover" hx-swap="morph:outerHTML">
+    <colgroup>
+        <col style="width: 10%;">
+        <col style="width: 15%;">
+        <col style="width: 20%;">
+        <col style="width: 55%;">
+    </colgroup>
+    <thead id="leaderboard-table-head">
         <tr>
             <th scope="col">#</th>
             <th scope="col">{% translate "User" %}</th>
             <th scope="col">{% translate "Date" %}</th>
             <th scope="col">
-                {% if current_sort == 'distance' %}
-                    {% translate "Distance" %}
-                {% elif current_sort == 'duration' %}
-                    {% translate "Duration" %}
-                {% else %}
-                    {% translate "Pace" %}
-                {% endif %}
+                {% if current_sort == 'distance' %}{% translate "Distance" %}
+                {% elif current_sort == 'duration' %}{% translate "Duration" %}
+                {% else %}{% translate "Pace" %}{% endif %}
             </th>
         </tr>
     </thead>
-</template>
-
-<tbody id="leaderboard-table-body">
-    {% for activity in activities %}
-    <tr>
-        <th scope="row">{{ forloop.counter }}</th>
-        <td>{{ activity.user.username }}</td>
-        <td>{{ activity.activity_date }}</td>
-        {% if current_sort == 'distance' %}
-            <td>{{ activity.distance|default:"0" }} km</td>
-        {% elif current_sort == 'duration' %}
-            <td>{{ activity.duration|format_time|default:"00:00:00" }}</td>
-        {% else %}
-            <td>{{ activity.pace|default:"00:00" }} min/km</td>
-        {% endif %}
-    </tr>
-    {% endfor %}
-</tbody>
+    <tbody id="leaderboard-table-body">
+        {% for activity in activities %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ activity.user.username }}</td>
+            <td>{{ activity.activity_date }}</td>
+            {% if current_sort == 'distance' %}
+                <td>{{ activity.distance|default:"0" }} km</td>
+            {% elif current_sort == 'duration' %}
+                <td>{{ activity.duration|format_time|default:"00:00:00" }}</td>
+            {% else %}
+                <td>{{ activity.pace|default:"00:00" }} min/km</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

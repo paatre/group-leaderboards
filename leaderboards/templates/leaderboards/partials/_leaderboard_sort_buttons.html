@@ -1,21 +1,15 @@
 {% load i18n %}
 
-<div class="mb-3" id="sort-buttons">
+<div class="mb-3" id="sort-buttons" hx-target="#leaderboard-table" hx-swap="morph:outerHTML" hx-swap-oob="true">
     <a hx-get="{% url 'leaderboard' %}?sort_by=distance"
-       hx-target="#leaderboard-table-body"
-       hx-swap="outerHTML"
        class="btn {% if current_sort == 'distance' %}btn-primary{% else %}btn-secondary{% endif %}">
        {% translate "Distance" %}
     </a>
     <a hx-get="{% url 'leaderboard' %}?sort_by=duration"
-       hx-target="#leaderboard-table-body"
-       hx-swap="outerHTML"
        class="btn {% if current_sort == 'duration' %}btn-primary{% else %}btn-secondary{% endif %}">
        {% translate "Duration" %}
     </a>
     <a hx-get="{% url 'leaderboard' %}?sort_by=pace"
-       hx-target="#leaderboard-table-body"
-       hx-swap="outerHTML"
        class="btn {% if current_sort == 'pace' or not current_sort %}btn-primary{% else %}btn-secondary{% endif %}">
        {% translate "Pace" %}
     </a>

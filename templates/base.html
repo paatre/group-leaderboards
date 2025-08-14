@@ -21,6 +21,7 @@
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js" integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/idiomorph/dist/idiomorph-ext.min.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
@@ -55,7 +56,7 @@
             </div>
         </div>
     </nav>
-    <div class="container py-3">
+    <div class="container py-3" hx-ext="morph">
         {% block content %}
         {% endblock %}
     </div>
