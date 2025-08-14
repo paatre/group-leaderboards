@@ -27,6 +27,8 @@ class LeaderboardView(ListView):
             "duration": "duration",
             "pace": "pace",
         }
+        if sort_by == "all":
+            return RunningActivity.objects.filter(user=self.request.user).order_by("-activity_date")
         order_field = sort_options.get(sort_by, "pace")
         return RunningActivity.objects.filter(user=self.request.user).order_by(order_field)
 

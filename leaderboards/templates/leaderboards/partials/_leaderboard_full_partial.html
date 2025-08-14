@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load field_formatters %}
+{% load metric_filters %}
 
 <template>
     {% include "leaderboards/partials/_leaderboard_sort_buttons.html" with current_sort=current_sort %}
@@ -7,20 +8,33 @@
 
 <table id="leaderboard-table" class="table table-striped table-hover" hx-swap="morph:outerHTML">
     <colgroup>
-        <col style="width: 10%;">
-        <col style="width: 15%;">
+        <col style="width: 5%;">
         <col style="width: 20%;">
-        <col style="width: 55%;">
+        <col style="width: 15%;">
+        {% if current_sort|is_in:"distance,duration,pace" %}
+            <col style="width: 60%;">
+        {% elif current_sort == 'all' %}
+            <col style="width: 20%;">
+            <col style="width: 20%;">
+            <col style="width: 20%;">
+        {% endif %}
     </colgroup>
     <thead id="leaderboard-table-head">
         <tr>
             <th scope="col">#</th>
             <th scope="col">{% translate "User" %}</th>
             <th scope="col">{% translate "Date" %}</th>
-            <th scope="col">
-                {% if current_sort == 'distance' %}{% translate "Distance" %}
-                {% elif current_sort == 'duration' %}{% translate "Duration" %}
-                {% else %}{% translate "Pace" %}{% endif %}
+                {% if current_sort == 'distance' %}
+                    <th scope="col">{% translate "Distance" %}</th>
+                {% elif current_sort == 'duration' %}
+                    <th scope="col">{% translate "Duration" %}</th>
+                {% elif current_sort == 'pace' %}
+                    <th scope="col">{% translate "Pace" %}</th>
+                {% elif current_sort == 'all' %}
+                    <th scope="col">{% translate "Distance" %}</th>
+                    <th scope="col">{% translate "Duration" %}</th>
+                    <th scope="col">{% translate "Pace" %}</th>
+                {% endif %}
             </th>
         </tr>
     </thead>
@@ -34,8 +48,14 @@
                 <td>{{ activity.distance|default:"0" }} km</td>
             {% elif current_sort == 'duration' %}
                 <td>{{ activity.duration|format_time|default:"00:00:00" }}</td>
-            {% else %}
+            {% elif current_sort == 'pace' %}
                 <td>{{ activity.pace|default:"00:00" }} min/km</td>
+            {% elif current_sort == 'all' %}
+                <td>{{ activity.distance|default:"0" }} km</td>
+                <td>{{ activity.duration|format_time|default:"00:00:00" }}</td>
+                <td>{{ activity.pace|default:"00:00" }} min/km</td>
+            {% else %}
+                <td>{% translate "N/A" %}</td>
             {% endif %}
         </tr>
         {% endfor %}

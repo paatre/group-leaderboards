@@ -5,15 +5,17 @@
         <th scope="col">#</th>
         <th scope="col">{% translate "User" %}</th>
         <th scope="col">{% translate "Date" %}</th>
-        <th scope="col">
-            {% if current_sort == 'distance' %}
-                {% translate "Distance" %}
-            {% elif current_sort == 'duration' %}
-                {% translate "Duration" %}
-            {% else %}
-                {% translate "Pace" %}
+            {% if current_sort == "distance" %}
+                <th scope="col">{% translate "Distance" %}</th>
+            {% elif current_sort == "duration" %}
+                <th scope="col">{% translate "Duration" %}</th>
+            {% elif current_sort == "pace" %}
+                <th scope="col">{% translate "Pace" %}</th>
+            {% elif current_sort == "All" %}
+                <th scope="col">{% translate "Distance" %}</th>
+                <th scope="col">{% translate "Duration" %}</th>
+                <th scope="col">{% translate "Pace" %}</th>
             {% endif %}
-        </th>
     </tr>
 </thead>
 

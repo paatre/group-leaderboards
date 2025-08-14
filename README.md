@@ -9,7 +9,6 @@
 
 ### TODO
 
-- Add filter to leaderboard which lets you see all metrics at once instead of single metric to get more context for activity performances
 - Add ascending and descending sorting options for the leaderboard metrics: sort toggle buttons to column headers?
 - Create an activity directly from the leaderboard
 - Add group management features

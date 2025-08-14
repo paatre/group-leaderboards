@@ -13,5 +13,9 @@
        class="btn {% if current_sort == 'pace' or not current_sort %}btn-primary{% else %}btn-secondary{% endif %}">
        {% translate "Pace" %}
     </a>
+    <a hx-get="{% url 'leaderboard' %}?sort_by=all"
+       class="btn {% if current_sort == 'all' %}btn-primary{% else %}btn-secondary{% endif %}">
+       {% translate "All" %}
+    </a>
 </div>
 
